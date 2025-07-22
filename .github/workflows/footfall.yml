@@ -24,9 +24,14 @@ jobs:
       - name: Run footfall script
         run: npm start
 
-      - name: Upload footfall image and result
+      - name: Upload footfall image
         uses: actions/upload-artifact@v4
         with:
           name: footfall-snapshot
-          path: |
-            counter.png
+          path: counter.png
+
+      - name: Upload footfall log
+        uses: actions/upload-artifact@v4
+        with:
+          name: footfall-log
+          path: footfall-log.csv
