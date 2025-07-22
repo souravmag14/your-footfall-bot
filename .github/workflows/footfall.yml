@@ -1,31 +1,32 @@
-name: Footfall Tracker
+name: Monthly Footfall Counter
 
 on:
   schedule:
-    - cron: '25 18 * * *'  # 11:55 PM IST daily
-  workflow_dispatch:       # Manual run from GitHub UI
+    - cron: '0 16 30 * *'  # Every 30th of the month at 16:00 IST (10:30 UTC)
+  workflow_dispatch:
 
 jobs:
   run-footfall:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 20
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run footfall counter
-      run: node get-footfall.js
+      - name: Run footfall script
+        run: npm start
 
-    - name: Upload log file
-      uses: actions/upload-artifact@v3
-      with:
-        name: footfall-log
-        path: footfall-log.csv
+      - name: Upload footfall image and result
+        uses: actions/upload-artifact@v4
+        with:
+          name: footfall-snapshot
+          path: |
+            counter.png
