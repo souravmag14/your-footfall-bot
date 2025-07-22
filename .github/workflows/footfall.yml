@@ -1,0 +1,31 @@
+name: Monthly Footfall Counter
+
+on:
+  schedule:
+    - cron: '0 3 28-31 * *'   # Runs at 3:00 AM on day 28–31 of each month
+  workflow_dispatch:
+
+jobs:
+  run-footfall:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Run Footfall Script
+      run: node get-footfall.js
+
+    - name: Upload Footfall Log
+      uses: actions/upload-artifact@v4
+      with:
+        name: footfall-log
+        path: footfall-log.csv
