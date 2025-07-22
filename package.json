@@ -1,10 +1,13 @@
 {
-  "name": "footfall-bot",
+  "name": "your-footfall-bot",
   "version": "1.0.0",
+  "description": "Automatically fetch and log website footfall count from image counter.",
   "main": "get-footfall.js",
-  "type": "module",
+  "scripts": {
+    "start": "node get-footfall.js"
+  },
   "dependencies": {
     "puppeteer": "^21.3.8",
-    "tesseract.js": "^5.0.3"
+    "tesseract.js": "^5.2.0"
   }
 }
